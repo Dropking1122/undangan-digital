@@ -8,7 +8,7 @@
 @endphp
 <div style="font-family: '{{ $fontBody ?? 'Poppins' }}', sans-serif; background: {{ $backgroundColor ?? '#ffffff' }}; min-height: 100vh;">
     <section style="min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:40px 24px; border-left:3px solid {{ $primaryColor ?? '#000' }}; border-right:3px solid {{ $primaryColor ?? '#000' }}; margin:0 8px;">
-        <p style="font-size:10px; letter-spacing:4px; text-transform:uppercase; color:{{ $primaryColor ?? '#000' }}; margin-bottom:24px;">— We're Getting Married —</p>
+        <p style="font-size:10px; letter-spacing:4px; text-transform:uppercase; color:{{ $primaryColor ?? '#000' }}; margin-bottom:24px;">- We're Getting Married -</p>
         <h1 style="font-family:'{{ $fontHeading ?? 'Playfair Display' }}', serif; font-size:48px; color:#111; margin-bottom:4px; font-weight:400;">{{ $groom }}</h1>
         <p style="font-size:16px; color:#999; margin:8px 0;">&amp;</p>
         <h1 style="font-family:'{{ $fontHeading ?? 'Playfair Display' }}', serif; font-size:48px; color:#111; margin-bottom:32px; font-weight:400;">{{ $bride }}</h1>

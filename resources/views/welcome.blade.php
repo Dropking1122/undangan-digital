@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UndanganKu — Undangan Digital Pernikahan Elegan #1 Indonesia</title>
+    <title>UndanganKu - Undangan Digital Pernikahan Elegan #1 Indonesia</title>
     <meta name="description" content="Buat undangan digital pernikahan elegan dalam hitungan menit. Bagikan via WhatsApp, kelola RSVP secara real-time, dan abadikan momen istimewa Anda.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{{ config('app.url') }}">
 
     <meta property="og:type" content="website">
-    <meta property="og:title" content="UndanganKu — Undangan Digital Pernikahan Elegan">
+    <meta property="og:title" content="UndanganKu - Undangan Digital Pernikahan Elegan">
     <meta property="og:description" content="Buat undangan digital pernikahan elegan dalam hitungan menit.">
     <meta property="og:locale" content="id_ID">
     <meta property="og:site_name" content="UndanganKu">
@@ -185,7 +185,7 @@
                     @auth
                         <a href="{{ route('dashboard') }}" class="btn-gold" style="justify-content:center;">Dashboard</a>
                     @else
-                        <a href="{{ route('register') }}" class="btn-gold" style="justify-content:center;">Mulai Gratis — Gratis!</a>
+                        <a href="{{ route('register') }}" class="btn-gold" style="justify-content:center;">Mulai Gratis Sekarang!</a>
                         <a href="{{ route('login') }}"    class="btn-outline" style="justify-content:center;">Masuk</a>
                     @endauth
                 </div>
@@ -279,7 +279,7 @@
                     </div>
                     <div>
                         <div style="font-size:10px;font-weight:600;color:#1A1A2E;">RSVP baru masuk</div>
-                        <div style="font-size:9px;color:#bbb;">Rini Setiawan — Hadir</div>
+                        <div style="font-size:9px;color:#bbb;">Rini Setiawan - Hadir</div>
                     </div>
                 </div>
             </div>
@@ -493,7 +493,7 @@
             @foreach([
                 ['Anita & Dimas','Jakarta','UndanganKu bikin undangan pernikahan kami jadi lebih berkesan. Tamu sangat terkesan, RSVP online sangat membantu!','Elegant Gold'],
                 ['Rina & Bowo','Surabaya','Mudah sekali! Dalam 30 menit undangan sudah jadi dan langsung bisa dibagikan ke grup WhatsApp.','Minimalist'],
-                ['Dewi & Fajar','Bandung','Fitur personal keren banget — setiap tamu dapat link dengan namanya sendiri. Banyak yang langsung rekomen UndanganKu!','Elegant Gold'],
+                ['Dewi & Fajar','Bandung','Fitur personal keren banget - setiap tamu dapat link dengan namanya sendiri. Banyak yang langsung rekomen UndanganKu!','Elegant Gold'],
             ] as [$name,$city,$review,$template])
             <div class="card" style="padding:28px;position:relative;">
                 <svg style="position:absolute;top:16px;right:20px;opacity:.07;" width="48" height="48" viewBox="0 0 24 24" fill="#C9A96E"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
@@ -603,7 +603,7 @@
         </h2>
         <p style="font-size:16px;color:rgba(255,255,255,.5);margin-bottom:36px;line-height:1.85;">Bergabung dengan lebih dari 10.000 pasangan yang telah mempercayakan undangan digital mereka kepada UndanganKu.</p>
         <a href="{{ route('register') }}" class="btn-gold" style="font-size:15px;padding:15px 38px;">
-            Buat Undangan Sekarang — Gratis!
+            Buat Undangan Sekarang, Gratis!
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
         <p style="font-size:12px;color:rgba(255,255,255,.2);margin-top:18px;letter-spacing:.3px;">Bayar sekali · Akses seumur hidup · Mulai dari Rp 45.000</p>
@@ -663,7 +663,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     });
 });
 
-// Mobile menu toggle (pure JS — no Alpine dependency needed on landing page)
+// Mobile menu toggle (pure JS - no Alpine dependency needed on landing page)
 const hamburgerBtn = document.getElementById('hamburgerBtn');
 const mobileMenu   = document.getElementById('mobileMenu');
 const iconMenu     = document.getElementById('iconMenu');

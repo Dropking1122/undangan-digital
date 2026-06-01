@@ -141,6 +141,40 @@
             {{-- GALLERY TAB --}}
             @elseif($activeTab === 'gallery')
             <h3 class="text-sm font-semibold text-gray-700 flex items-center gap-2"><svg width="14" height="14" fill="none" stroke="#C9A96E" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Galeri Foto</span></h3>
+
+            @if(!$canUseGallery)
+            {{-- Upgrade banner untuk paket Basic --}}
+            <div style="background:linear-gradient(135deg,#FFF7ED,#FEF3C7);border:1.5px solid #F59E0B33;border-radius:16px;padding:20px 16px;text-align:center;">
+                <div style="width:48px;height:48px;background:#FEF3C7;border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
+                    <svg width="22" height="22" fill="none" stroke="#D97706" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                </div>
+                <p style="font-size:13px;font-weight:700;color:#92400E;margin:0 0 6px;">Fitur Galeri Foto</p>
+                <p style="font-size:11px;color:#B45309;margin:0 0 16px;line-height:1.6;">Paket <strong>Basic</strong> tidak menyertakan galeri foto.<br>Upgrade ke <strong>Pro</strong> untuk menambahkan foto ke undangan Anda.</p>
+                <div style="background:white;border-radius:12px;padding:12px;margin-bottom:16px;border:1px solid #FDE68A;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+                        <span style="font-size:11px;font-weight:700;color:#1A1A2E;">Paket Pro</span>
+                        <span style="font-size:13px;font-weight:700;color:#C9A96E;">Rp 60.000</span>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:4px;">
+                        <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#555;">
+                            <svg width="11" height="11" fill="none" stroke="#C9A96E" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+                            Galeri foto hingga 50 foto
+                        </div>
+                        <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#555;">
+                            <svg width="11" height="11" fill="none" stroke="#C9A96E" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+                            5 undangan aktif
+                        </div>
+                        <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#555;">
+                            <svg width="11" height="11" fill="none" stroke="#C9A96E" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+                            Semua fitur lainnya tetap ada
+                        </div>
+                    </div>
+                </div>
+                <a href="{{ route('register') }}" style="display:block;background:linear-gradient(135deg,#C9A96E,#A0824A);color:white;text-decoration:none;padding:10px 16px;border-radius:10px;font-size:12px;font-weight:700;text-align:center;">
+                    Upgrade ke Pro - Rp 60.000
+                </a>
+            </div>
+            @else
             <div class="space-y-3">
                 <form wire:submit="uploadGallery">
                     <label class="block border-2 border-dashed border-amber-300 rounded-xl p-4 text-center cursor-pointer hover:bg-amber-50 transition">
@@ -175,6 +209,7 @@
                 <p class="text-xs text-gray-400 text-center py-4">Belum ada foto. Upload foto untuk galeri undangan.</p>
                 @endif
             </div>
+            @endif
 
             {{-- STORY TAB --}}
             @elseif($activeTab === 'story')
@@ -206,10 +241,10 @@
                 <div>
                     <label class="builder-label">Font Judul</label>
                     <select wire:model.live="fontHeading" class="builder-input">
-                        <option value="Playfair Display">Playfair Display — Elegan</option>
-                        <option value="Cormorant Garamond">Cormorant Garamond — Klasik</option>
-                        <option value="Great Vibes">Great Vibes — Romantis</option>
-                        <option value="Poppins">Poppins — Modern</option>
+                        <option value="Playfair Display">Playfair Display - Elegan</option>
+                        <option value="Cormorant Garamond">Cormorant Garamond - Klasik</option>
+                        <option value="Great Vibes">Great Vibes - Romantis</option>
+                        <option value="Poppins">Poppins - Modern</option>
                     </select>
                 </div>
                 <div>

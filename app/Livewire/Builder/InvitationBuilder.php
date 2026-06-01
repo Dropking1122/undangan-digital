@@ -55,10 +55,14 @@ class InvitationBuilder extends Component
     public string $giftBankName      = '';
 
     public string $saveStatus = '';
+    public bool $canUseGallery = true;
 
     public function mount(Invitation $invitation): void
     {
         abort_if(auth()->id() !== $invitation->user_id, 403);
+
+        $plan = auth()->user()->getActivePlan();
+        $this->canUseGallery = $plan ? (bool) $plan->can_use_gallery : true;
 
         $this->invitation = $invitation->load(['galleries', 'music', 'digitalGifts', 'rsvps']);
 
@@ -160,6 +164,7 @@ class InvitationBuilder extends Component
 
     public function uploadGallery(): void
     {
+        abort_if(!$this->canUseGallery, 403, 'Paket Basic tidak dapat menggunakan galeri foto.');
         $this->validate([
             'galleryFiles'   => 'required|array|max:10',
             'galleryFiles.*' => 'image|max:5120',
