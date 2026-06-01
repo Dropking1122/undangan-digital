@@ -1004,7 +1004,7 @@ body { background: #FDF8F2 !important; }
 }
 
 /* Floral corner ornament overrides */
-.cover-corner { width: 140px !important; height: 140px !important; opacity: 1 !important; display: block !important; }
+.cover-corner { width: 150px !important; height: 150px !important; opacity: 1 !important; display: block !important; }
 .cover-corner.tl { animation: floral-sway    7s ease-in-out infinite; transform-origin: 0 0; }
 .cover-corner.tr { animation: floral-sway-tr 8s ease-in-out infinite .6s; transform-origin: 100% 0; }
 .cover-corner.bl { animation: floral-sway-bl 9s ease-in-out infinite 1.2s; transform-origin: 0 100%; }
@@ -1048,7 +1048,62 @@ body { background: #FDF8F2 !important; }
     ) !important;
 }
 
-/* Floral divider between main sections */
+/* ── FLORAL: Section colours ── */
+/* Light cream sections (couple, gallery) */
+.sec-cream  { background: #FDF8F2 !important; }
+.sec-cream2 { background: #F9EEE4 !important; }
+
+/* Dark sections → deep burgundy (matches cover), keeps white text readable */
+.sec-navy  { background: #2c1215 !important; }
+.sec-navy2 { background: #231018 !important; }
+.bismillah-wrap { background: #2c1215 !important; }
+.ayat-wrap      { background: #231018 !important; }
+
+/* ── FLORAL: Fix all Great Vibes cursive → Cormorant Garamond italic ── */
+/* Bismillah opening */
+.bismillah-title {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-style: italic !important;
+    font-size: clamp(2.4rem, 9vw, 3.4rem) !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.02em !important;
+}
+/* Couple profile names */
+.profil-nama-panggil {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-style: italic !important;
+    font-size: clamp(1.9rem, 7vw, 2.6rem) !important;
+    font-weight: 600 !important;
+}
+/* Profile photo placeholder initial */
+.profil-foto-initial {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-style: italic !important;
+    font-weight: 600 !important;
+}
+/* Countdown date text */
+.cd-date-text {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-style: italic !important;
+    font-size: clamp(1.3rem, 5vw, 1.8rem) !important;
+    font-weight: 600 !important;
+}
+/* Closing names */
+.closing-names {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-style: italic !important;
+    font-size: clamp(2.4rem, 10vw, 3.6rem) !important;
+    font-weight: 600 !important;
+}
+
+/* ── FLORAL: Light section text fixes (cream bg → dark text needed) ── */
+/* sec-cream sections use dark text by default — ensure consistency */
+.sec-cream  .sec-title,
+.sec-cream2 .sec-title  { color: #2c1215 !important; }
+.sec-cream  .eyebrow,
+.sec-cream2 .eyebrow    { color: var(--gold) !important; }
+
+/* ── FLORAL: Divider ── */
 .floral-section-divider {
     text-align: center;
     padding: 12px 0;
@@ -1058,13 +1113,6 @@ body { background: #FDF8F2 !important; }
     opacity: .5;
     background: #FDF8F2;
 }
-
-/* Section background tints for floral */
-.sec-cream  { background: #FDF8F2 !important; }
-.sec-cream2 { background: #F9EEE4 !important; }
-
-/* Opening/bismillah section floral feel */
-.bismillah-wrap { background: #FDF8F2 !important; }
 @endif
 </style>
 
