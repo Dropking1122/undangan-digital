@@ -106,6 +106,27 @@ class DatabaseSeeder extends Seeder
             ],
         ]);
 
+        Template::updateOrCreate(['slug' => 'floral-romantic'], [
+            'category_id' => $catWedding->id,
+            'name' => 'Floral Romantic',
+            'theme_directory' => 'floral-romantic',
+            'status' => 'active',
+            'is_premium' => false,
+            'sort_order' => 3,
+            'default_theme_settings' => [
+                'primary_color' => '#C8956C',
+                'secondary_color' => '#ffffff',
+                'font_heading' => 'Cormorant Garamond',
+                'font_body' => 'Poppins',
+                'background_color' => '#FDF8F2',
+            ],
+            'default_sections' => [
+                'cover' => true, 'couple' => true, 'countdown' => true,
+                'gallery' => true, 'story' => true, 'gift' => true,
+                'rsvp' => true, 'guestbook' => true, 'video' => false,
+            ],
+        ]);
+
         // Demo invitation
         $demoUser = User::where('email', 'demo@undanganku.id')->first();
         $elegantTemplate = Template::where('slug', 'elegant-gold')->first();

@@ -21,6 +21,7 @@
     $coverBg  = $galleries->first()?->getUrl();
     $groomInitial = strtoupper(substr($groom, 0, 1));
     $brideInitial = strtoupper(substr($bride, 0, 1));
+    $isFloral = ($themeDir === 'floral-romantic');
 @endphp
 
 {{-- ══════════════════════════════════════════════════════════════ --}}
@@ -954,6 +955,108 @@ body.inv-locked { overflow-y: hidden; }
     padding: 20px; cursor: pointer;
 }
 #lightbox img { max-width: 100%; max-height: 90vh; border-radius: 12px; object-fit: contain; }
+
+@if($isFloral)
+/* ══════════════════════════════════
+   FLORAL ROMANTIC THEME OVERRIDES
+══════════════════════════════════ */
+@@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Poppins:wght@300;400;500;600&display=swap');
+
+:root {
+    --gold:    {{ $primary }};
+    --gold-lt: {{ $primary }}BB;
+    --gold-20: {{ $primary }}33;
+    --gold-10: {{ $primary }}1A;
+}
+
+body { background: #FDF8F2 !important; }
+
+/* Floral corner animations */
+@@keyframes floral-sway {
+    0%,100% { transform: rotate(0deg); }
+    25%     { transform: rotate(2deg); }
+    75%     { transform: rotate(-1.5deg); }
+}
+@@keyframes floral-sway-tr {
+    0%,100% { transform: scaleX(-1) rotate(0deg); }
+    25%     { transform: scaleX(-1) rotate(2deg); }
+    75%     { transform: scaleX(-1) rotate(-1.5deg); }
+}
+@@keyframes floral-sway-bl {
+    0%,100% { transform: scaleY(-1) rotate(0deg); }
+    25%     { transform: scaleY(-1) rotate(1.5deg); }
+    75%     { transform: scaleY(-1) rotate(-2deg); }
+}
+@@keyframes floral-sway-br {
+    0%,100% { transform: scale(-1,-1) rotate(0deg); }
+    25%     { transform: scale(-1,-1) rotate(2deg); }
+    75%     { transform: scale(-1,-1) rotate(-1.5deg); }
+}
+@@keyframes petal-fall {
+    0%   { transform: translateY(0) rotate(0deg) translateX(0); opacity: 0; }
+    5%   { opacity: .75; }
+    85%  { opacity: .3; }
+    100% { transform: translateY(100vh) rotate(480deg) translateX(60px); opacity: 0; }
+}
+@@keyframes floral-breathe {
+    0%,100% { opacity: .75; transform: scale(1); }
+    50%     { opacity: 1;   transform: scale(1.02); }
+}
+
+/* Floral corner ornament overrides */
+.cover-corner { width: 140px !important; height: 140px !important; opacity: 1 !important; }
+.cover-corner.tl { animation: floral-sway    7s ease-in-out infinite; transform-origin: 0 0; }
+.cover-corner.tr { animation: floral-sway-tr 8s ease-in-out infinite .6s; transform-origin: 100% 0; }
+.cover-corner.bl { animation: floral-sway-bl 9s ease-in-out infinite 1.2s; transform-origin: 0 100%; }
+.cover-corner.br { animation: floral-sway-br 7.5s ease-in-out infinite 1.8s; transform-origin: 100% 100%; }
+
+/* Floating petals container */
+#floral-petals { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; pointer-events: none; z-index: 9998; overflow: hidden; }
+.floral-petal {
+    position: absolute;
+    top: -20px;
+    border-radius: 50% 0 50% 0;
+    animation: petal-fall linear infinite;
+    opacity: 0;
+}
+
+/* Cover background for floral */
+#inv-cover .cover-bg {
+    @if($coverBg)
+    background: url('{{ $coverBg }}') center/cover no-repeat;
+    @else
+    background: radial-gradient(ellipse at 30% 20%, #3d1a1a 0%, #2a0f10 45%, #1a0c0d 100%) !important;
+    @endif
+}
+#inv-cover .cover-overlay {
+    background: linear-gradient(
+        to bottom,
+        rgba(30,5,8,.55) 0%,
+        rgba(20,5,8,.15) 35%,
+        rgba(20,5,8,.2)  55%,
+        rgba(20,5,8,.8)  85%,
+        rgba(15,5,8,.95) 100%
+    ) !important;
+}
+
+/* Floral divider between main sections */
+.floral-section-divider {
+    text-align: center;
+    padding: 12px 0;
+    font-size: 16px;
+    letter-spacing: 8px;
+    color: var(--gold);
+    opacity: .5;
+    background: #FDF8F2;
+}
+
+/* Section background tints for floral */
+.sec-cream  { background: #FDF8F2 !important; }
+.sec-cream2 { background: #F9EEE4 !important; }
+
+/* Opening/bismillah section floral feel */
+.bismillah-wrap { background: #FDF8F2 !important; }
+@endif
 </style>
 
 {{-- ══════════════════════════════════════════════════════════════ --}}
@@ -982,6 +1085,86 @@ body.inv-locked { overflow-y: hidden; }
     <div class="cover-overlay"></div>
 
     {{-- Corner SVG ornaments --}}
+    @if($isFloral)
+    {{-- Floral Romantic: botanical corner ornaments --}}
+    <svg class="cover-corner tl" viewBox="0 0 140 140" fill="none">
+        <path d="M2 2 Q20 25 46 52 Q62 70 66 96" stroke="#F4A7B9" stroke-width="1.6" opacity=".6"/>
+        <path d="M2 2 Q25 20 52 46 Q70 62 96 66" stroke="#F4A7B9" stroke-width="1.6" opacity=".6"/>
+        <path d="M30 10 Q24 24 18 40" stroke="#F4A7B9" stroke-width="1.1" opacity=".45"/>
+        <path d="M10 30 Q24 24 40 18" stroke="#F4A7B9" stroke-width="1.1" opacity=".45"/>
+        <path d="M18 40 Q11 30 21 23 Q26 35 18 40Z" fill="#8FBF91" opacity=".7"/>
+        <path d="M40 18 Q30 11 23 21 Q35 26 40 18Z" fill="#8FBF91" opacity=".7"/>
+        <path d="M46 30 Q40 20 50 15 Q54 27 46 30Z" fill="#8FBF91" opacity=".65"/>
+        <path d="M30 46 Q20 40 15 50 Q27 54 30 46Z" fill="#8FBF91" opacity=".65"/>
+        <path d="M60 50 Q53 40 62 34 Q67 46 60 50Z" fill="#8FBF91" opacity=".6"/>
+        <path d="M50 60 Q40 53 34 62 Q46 67 50 60Z" fill="#8FBF91" opacity=".6"/>
+        <ellipse cx="9" cy="9" rx="10" ry="6" fill="#F4A7B9" opacity=".9" transform="rotate(0,9,9)"/>
+        <ellipse cx="9" cy="9" rx="10" ry="6" fill="#F4A7B9" opacity=".9" transform="rotate(36,9,9)"/>
+        <ellipse cx="9" cy="9" rx="10" ry="6" fill="#F4A7B9" opacity=".9" transform="rotate(72,9,9)"/>
+        <ellipse cx="9" cy="9" rx="10" ry="6" fill="#F4A7B9" opacity=".9" transform="rotate(108,9,9)"/>
+        <ellipse cx="9" cy="9" rx="10" ry="6" fill="#F4A7B9" opacity=".9" transform="rotate(144,9,9)"/>
+        <circle cx="9" cy="9" r="5" fill="#F7C04A" opacity=".95"/>
+        <circle cx="9" cy="9" r="2.2" fill="#E8902A" opacity=".85"/>
+        <ellipse cx="66" cy="48" rx="6" ry="3.8" fill="#F9C4D0" opacity=".8" transform="rotate(0,66,48)"/>
+        <ellipse cx="66" cy="48" rx="6" ry="3.8" fill="#F9C4D0" opacity=".8" transform="rotate(60,66,48)"/>
+        <ellipse cx="66" cy="48" rx="6" ry="3.8" fill="#F9C4D0" opacity=".8" transform="rotate(120,66,48)"/>
+        <circle cx="66" cy="48" r="2.8" fill="#F7C04A" opacity=".9"/>
+        <ellipse cx="48" cy="66" rx="6" ry="3.8" fill="#F4A7B9" opacity=".75" transform="rotate(30,48,66)"/>
+        <ellipse cx="48" cy="66" rx="6" ry="3.8" fill="#F4A7B9" opacity=".75" transform="rotate(90,48,66)"/>
+        <ellipse cx="48" cy="66" rx="6" ry="3.8" fill="#F4A7B9" opacity=".75" transform="rotate(150,48,66)"/>
+        <circle cx="48" cy="66" r="2.4" fill="#F7C04A" opacity=".85"/>
+        <circle cx="80" cy="78" r="3" fill="#F4A7B9" opacity=".35"/>
+        <circle cx="78" cy="80" r="2" fill="#F4A7B9" opacity=".25"/>
+    </svg>
+    <svg class="cover-corner tr" viewBox="0 0 140 140" fill="none">
+        <path d="M2 2 Q20 25 46 52 Q62 70 66 96" stroke="#F4A7B9" stroke-width="1.6" opacity=".6"/>
+        <path d="M2 2 Q25 20 52 46 Q70 62 96 66" stroke="#F4A7B9" stroke-width="1.6" opacity=".6"/>
+        <path d="M30 10 Q24 24 18 40" stroke="#F4A7B9" stroke-width="1.1" opacity=".45"/>
+        <path d="M10 30 Q24 24 40 18" stroke="#F4A7B9" stroke-width="1.1" opacity=".45"/>
+        <path d="M18 40 Q11 30 21 23 Q26 35 18 40Z" fill="#8FBF91" opacity=".7"/>
+        <path d="M40 18 Q30 11 23 21 Q35 26 40 18Z" fill="#8FBF91" opacity=".7"/>
+        <path d="M46 30 Q40 20 50 15 Q54 27 46 30Z" fill="#8FBF91" opacity=".65"/>
+        <path d="M30 46 Q20 40 15 50 Q27 54 30 46Z" fill="#8FBF91" opacity=".65"/>
+        <ellipse cx="9" cy="9" rx="10" ry="6" fill="#F4A7B9" opacity=".9" transform="rotate(0,9,9)"/>
+        <ellipse cx="9" cy="9" rx="10" ry="6" fill="#F4A7B9" opacity=".9" transform="rotate(36,9,9)"/>
+        <ellipse cx="9" cy="9" rx="10" ry="6" fill="#F4A7B9" opacity=".9" transform="rotate(72,9,9)"/>
+        <ellipse cx="9" cy="9" rx="10" ry="6" fill="#F4A7B9" opacity=".9" transform="rotate(108,9,9)"/>
+        <ellipse cx="9" cy="9" rx="10" ry="6" fill="#F4A7B9" opacity=".9" transform="rotate(144,9,9)"/>
+        <circle cx="9" cy="9" r="5" fill="#F7C04A" opacity=".95"/>
+        <circle cx="9" cy="9" r="2.2" fill="#E8902A" opacity=".85"/>
+        <ellipse cx="66" cy="48" rx="6" ry="3.8" fill="#F9C4D0" opacity=".8" transform="rotate(0,66,48)"/>
+        <ellipse cx="66" cy="48" rx="6" ry="3.8" fill="#F9C4D0" opacity=".8" transform="rotate(60,66,48)"/>
+        <ellipse cx="66" cy="48" rx="6" ry="3.8" fill="#F9C4D0" opacity=".8" transform="rotate(120,66,48)"/>
+        <circle cx="66" cy="48" r="2.8" fill="#F7C04A" opacity=".9"/>
+    </svg>
+    <svg class="cover-corner bl" viewBox="0 0 140 140" fill="none">
+        <path d="M2 2 Q20 25 46 52 Q62 70 66 96" stroke="#F9C4D0" stroke-width="1.5" opacity=".55"/>
+        <path d="M2 2 Q25 20 52 46 Q70 62 96 66" stroke="#F9C4D0" stroke-width="1.5" opacity=".55"/>
+        <path d="M30 10 Q24 24 18 40" stroke="#F9C4D0" stroke-width="1" opacity=".4"/>
+        <path d="M10 30 Q24 24 40 18" stroke="#F9C4D0" stroke-width="1" opacity=".4"/>
+        <path d="M18 40 Q11 30 21 23 Q26 35 18 40Z" fill="#8FBF91" opacity=".65"/>
+        <path d="M40 18 Q30 11 23 21 Q35 26 40 18Z" fill="#8FBF91" opacity=".65"/>
+        <ellipse cx="9" cy="9" rx="9" ry="5.5" fill="#F9C4D0" opacity=".85" transform="rotate(0,9,9)"/>
+        <ellipse cx="9" cy="9" rx="9" ry="5.5" fill="#F9C4D0" opacity=".85" transform="rotate(60,9,9)"/>
+        <ellipse cx="9" cy="9" rx="9" ry="5.5" fill="#F9C4D0" opacity=".85" transform="rotate(120,9,9)"/>
+        <circle cx="9" cy="9" r="4.5" fill="#F7C04A" opacity=".9"/>
+        <circle cx="9" cy="9" r="2" fill="#E8902A" opacity=".8"/>
+    </svg>
+    <svg class="cover-corner br" viewBox="0 0 140 140" fill="none">
+        <path d="M2 2 Q20 25 46 52 Q62 70 66 96" stroke="#F9C4D0" stroke-width="1.5" opacity=".55"/>
+        <path d="M2 2 Q25 20 52 46 Q70 62 96 66" stroke="#F9C4D0" stroke-width="1.5" opacity=".55"/>
+        <path d="M30 10 Q24 24 18 40" stroke="#F9C4D0" stroke-width="1" opacity=".4"/>
+        <path d="M10 30 Q24 24 40 18" stroke="#F9C4D0" stroke-width="1" opacity=".4"/>
+        <path d="M18 40 Q11 30 21 23 Q26 35 18 40Z" fill="#8FBF91" opacity=".65"/>
+        <path d="M40 18 Q30 11 23 21 Q35 26 40 18Z" fill="#8FBF91" opacity=".65"/>
+        <ellipse cx="9" cy="9" rx="9" ry="5.5" fill="#F9C4D0" opacity=".85" transform="rotate(0,9,9)"/>
+        <ellipse cx="9" cy="9" rx="9" ry="5.5" fill="#F9C4D0" opacity=".85" transform="rotate(60,9,9)"/>
+        <ellipse cx="9" cy="9" rx="9" ry="5.5" fill="#F9C4D0" opacity=".85" transform="rotate(120,9,9)"/>
+        <circle cx="9" cy="9" r="4.5" fill="#F7C04A" opacity=".9"/>
+        <circle cx="9" cy="9" r="2" fill="#E8902A" opacity=".8"/>
+    </svg>
+    @else
+    {{-- Default: geometric corner ornaments --}}
     <svg class="cover-corner tl" viewBox="0 0 100 100" fill="none">
         <path d="M8 8 L8 52" stroke="{{ $primary }}" stroke-width=".9" opacity=".5"/>
         <path d="M8 8 L52 8" stroke="{{ $primary }}" stroke-width=".9" opacity=".5"/>
@@ -1008,6 +1191,7 @@ body.inv-locked { overflow-y: hidden; }
         <path d="M8 8 Q55 8 55 55" stroke="{{ $primary }}" stroke-width=".7" opacity=".35"/>
         <circle cx="8" cy="8" r="3" fill="{{ $primary }}" opacity=".7"/>
     </svg>
+    @endif
 
     {{-- TOP: couple names --}}
     <div class="cover-top">
@@ -1043,6 +1227,41 @@ body.inv-locked { overflow-y: hidden; }
         <p class="cover-scroll-hint">sentuh untuk membuka</p>
     </div>
 </div>
+
+@if($isFloral)
+{{-- ── Floating petals (fixed, above everything except cover) ── --}}
+<div id="floral-petals">
+    @php
+    $petalColors = ['#F4A7B9','#F9C4D0','#FDDDE6','#F7A8C0','#FBC8D6','#F4C2CC','#FDE0E8'];
+    $petalData = [
+        ['left'=>'4%',  'dur'=>'6s',  'delay'=>'0s',   'w'=>8,  'h'=>12],
+        ['left'=>'11%', 'dur'=>'8s',  'delay'=>'1.2s', 'w'=>11, 'h'=>15],
+        ['left'=>'19%', 'dur'=>'7s',  'delay'=>'2.5s', 'w'=>7,  'h'=>10],
+        ['left'=>'27%', 'dur'=>'9s',  'delay'=>'0.8s', 'w'=>10, 'h'=>14],
+        ['left'=>'35%', 'dur'=>'6.5s','delay'=>'3s',   'w'=>9,  'h'=>13],
+        ['left'=>'44%', 'dur'=>'7.5s','delay'=>'1.5s', 'w'=>12, 'h'=>16],
+        ['left'=>'52%', 'dur'=>'8.5s','delay'=>'4s',   'w'=>7,  'h'=>11],
+        ['left'=>'61%', 'dur'=>'7s',  'delay'=>'0.5s', 'w'=>10, 'h'=>14],
+        ['left'=>'70%', 'dur'=>'6s',  'delay'=>'2s',   'w'=>8,  'h'=>12],
+        ['left'=>'78%', 'dur'=>'9s',  'delay'=>'3.5s', 'w'=>11, 'h'=>15],
+        ['left'=>'86%', 'dur'=>'7.5s','delay'=>'1s',   'w'=>9,  'h'=>13],
+        ['left'=>'93%', 'dur'=>'8s',  'delay'=>'4.5s', 'w'=>7,  'h'=>10],
+    ];
+    @endphp
+    @foreach($petalData as $i => $p)
+    <div class="floral-petal" style="
+        left:{{ $p['left'] }};
+        background:{{ $petalColors[$i % count($petalColors)] }};
+        width:{{ $p['w'] }}px;
+        height:{{ $p['h'] }}px;
+        animation-duration:{{ $p['dur'] }};
+        animation-delay:{{ $p['delay'] }};
+        border-radius: {{ ($i % 2 === 0) ? '50% 0 50% 0' : '0 50% 0 50%' }};
+        opacity:.65;
+    "></div>
+    @endforeach
+</div>
+@endif
 
 {{-- ══════════════════════════════════════════════════════════════ --}}
 {{-- MAIN CONTENT                                                   --}}
