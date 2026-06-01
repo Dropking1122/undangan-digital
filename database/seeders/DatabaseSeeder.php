@@ -1,11 +1,14 @@
 <?php
 namespace Database\Seeders;
 use App\Models\Category;
+use App\Models\Invitation;
 use App\Models\Plan;
+use App\Models\Subscription;
 use App\Models\Template;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -88,6 +91,58 @@ class DatabaseSeeder extends Seeder
                 'rsvp' => true, 'guestbook' => true, 'video' => false,
             ],
         ]);
+
+        // Demo invitation
+        $demoUser = User::where('email', 'demo@undanganku.id')->first();
+        $elegantTemplate = Template::where('slug', 'elegant-gold')->first();
+        if ($demoUser && $elegantTemplate) {
+            Invitation::updateOrCreate(['slug' => 'demo-wedding'], [
+                'uuid'        => Str::uuid(),
+                'user_id'     => $demoUser->id,
+                'template_id' => $elegantTemplate->id,
+                'title'       => 'Pernikahan Budi & Sari',
+                'status'      => 'published',
+                'published_at'=> now(),
+                'invitation_data' => [
+                    'groom_name'         => 'Budi Santoso',
+                    'groom_father'       => 'Bapak Hadi Santoso',
+                    'groom_mother'       => 'Ibu Sri Wahyuni',
+                    'bride_name'         => 'Sari Dewi',
+                    'bride_father'       => 'Bapak Agus Prasetyo',
+                    'bride_mother'       => 'Ibu Rina Lestari',
+                    'event_date'         => '2026-08-17',
+                    'event_time'         => '10:00',
+                    'event_end_time'     => '14:00',
+                    'venue_name'         => 'Gedung Serbaguna Harmoni',
+                    'venue_address'      => 'Jl. Harmoni No. 10, Jakarta Pusat',
+                    'venue_maps_url'     => 'https://maps.google.com',
+                    'opening_text'       => 'Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri pernikahan kami.',
+                    'couple_story'       => 'Kami pertama kali bertemu di sebuah acara komunitas pada tahun 2020. Sejak saat itu, perjalanan kami penuh dengan kenangan indah yang akhirnya membawa kami ke hari yang paling istimewa ini.',
+                    'bride_photo'        => null,
+                    'groom_photo'        => null,
+                    'cover_photo'        => null,
+                    'rsvp_deadline'      => '2026-08-10',
+                ],
+                'theme_settings' => [
+                    'primary_color'    => '#C9A96E',
+                    'secondary_color'  => '#ffffff',
+                    'font_heading'     => 'Playfair Display',
+                    'font_body'        => 'Poppins',
+                    'background_color' => '#fffdf7',
+                ],
+                'sections' => [
+                    'cover'     => true,
+                    'couple'    => true,
+                    'countdown' => true,
+                    'gallery'   => true,
+                    'story'     => true,
+                    'gift'      => true,
+                    'rsvp'      => true,
+                    'guestbook' => true,
+                    'video'     => false,
+                ],
+            ]);
+        }
 
         $this->command->info('✅ Database seeded successfully!');
     }

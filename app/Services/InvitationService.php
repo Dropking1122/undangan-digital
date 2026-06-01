@@ -1,5 +1,6 @@
 <?php
 namespace App\Services;
+
 use App\Models\Invitation;
 use App\Models\Template;
 use App\Models\User;
@@ -10,15 +11,16 @@ class InvitationService
     public function create(User $user, Template $template, array $data): Invitation
     {
         $slug = $this->generateUniqueSlug($data['slug'] ?? $data['title']);
+
         return Invitation::create([
-            'user_id' => $user->id,
-            'template_id' => $template->id,
-            'title' => $data['title'],
-            'slug' => $slug,
-            'status' => 'draft',
+            'user_id'         => $user->id,
+            'template_id'     => $template->id,
+            'title'           => $data['title'],
+            'slug'            => $slug,
+            'status'          => 'draft',
             'invitation_data' => $data['invitation_data'] ?? [],
-            'theme_settings' => $template->getDefaultThemeSettings(),
-            'sections' => $template->getDefaultSections(),
+            'theme_settings'  => $template->getDefaultThemeSettings(),
+            'sections'        => $template->getDefaultSections(),
         ]);
     }
 
@@ -30,17 +32,21 @@ class InvitationService
 
     public function updateInvitationData(Invitation $invitation, array $invitationData): void
     {
-        $invitation->update(['invitation_data' => array_merge($invitation->getInvitationData(), $invitationData)]);
+        $existing = $invitation->getInvitationData();
+        $invitation->update(['invitation_data' => array_merge($existing, $invitationData)]);
     }
 
     public function updateThemeSettings(Invitation $invitation, array $themeSettings): void
     {
-        $invitation->update(['theme_settings' => array_merge($invitation->getThemeSettings(), $themeSettings)]);
+        $existing = $invitation->getThemeSettings();
+        $invitation->update(['theme_settings' => array_merge($existing, $themeSettings)]);
     }
 
     public function updateSections(Invitation $invitation, array $sections): void
     {
-        $invitation->update(['sections' => array_merge($invitation->getSections(), $sections)]);
+        $existing = $invitation->getSections();
+        $merged   = array_replace($existing, $sections);
+        $invitation->update(['sections' => $merged]);
     }
 
     public function publish(Invitation $invitation): Invitation
@@ -62,12 +68,14 @@ class InvitationService
 
     private function generateUniqueSlug(string $base): string
     {
-        $slug = Str::slug($base);
+        $slug     = Str::slug($base);
         $original = $slug;
-        $count = 1;
+        $count    = 1;
+
         while (Invitation::where('slug', $slug)->exists()) {
             $slug = $original . '-' . $count++;
         }
+
         return $slug;
     }
 }

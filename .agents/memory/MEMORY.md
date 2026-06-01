@@ -1,3 +1,4 @@
 - [Filament v5 API Changes](filament-v5-api.md) — v5 uses Schema not Form for form(), getNavigationIcon() method override avoids PHP 8.4 property type conflict
 - [InvitationMusic Table Name](invitation-music-table.md) — Model resolves to `invitation_music` (singular); must declare `protected $table = 'invitation_musics'`
 - [MySQL Setup via start.sh](mysql-setup.md) — MySQL 8.0 started via nohup in start.sh; must run before Laravel; data at /home/runner/.mysql/data
+- [Blade JSON-LD at-sign escape](blade-jsonld-escape.md) — JSON-LD keys like @context/@type inside <script> blocks must be escaped as @@context/@@type in Blade or PHP throws ParseError
