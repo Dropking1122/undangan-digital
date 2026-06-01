@@ -2,6 +2,10 @@
 namespace App\Filament\Resources;
 use App\Filament\Resources\PlanResource\Pages;
 use App\Models\Plan;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
@@ -43,11 +47,20 @@ class PlanResource extends Resource
             Tables\Columns\TextColumn::make('price')->money('IDR'),
             Tables\Columns\TextColumn::make('max_invitations')->label('Max Undangan'),
             Tables\Columns\IconColumn::make('is_active')->boolean(),
-        ])->actions([Tables\Actions\EditAction::make()])->bulkActions([Tables\Actions\BulkActionGroup::make([Tables\Actions\DeleteBulkAction::make()])]);
+        ])->actions([
+            EditAction::make(),
+            DeleteAction::make(),
+        ])->bulkActions([
+            BulkActionGroup::make([DeleteBulkAction::make()]),
+        ]);
     }
 
     public static function getPages(): array
     {
-        return ['index' => Pages\ListPlans::route('/'), 'create' => Pages\CreatePlan::route('/create'), 'edit' => Pages\EditPlan::route('/{record}/edit')];
+        return [
+            'index'  => Pages\ListPlans::route('/'),
+            'create' => Pages\CreatePlan::route('/create'),
+            'edit'   => Pages\EditPlan::route('/{record}/edit'),
+        ];
     }
 }

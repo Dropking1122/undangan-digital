@@ -2,6 +2,10 @@
 namespace App\Filament\Resources;
 use App\Filament\Resources\UserResource\Pages;
 use App\Models\User;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
@@ -34,11 +38,20 @@ class UserResource extends Resource
             Tables\Columns\IconColumn::make('is_admin')->boolean()->label('Admin'),
             Tables\Columns\TextColumn::make('invitations_count')->counts('invitations')->label('Undangan'),
             Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable()->since(),
-        ])->actions([Tables\Actions\EditAction::make()])->bulkActions([Tables\Actions\BulkActionGroup::make([Tables\Actions\DeleteBulkAction::make()])]);
+        ])->actions([
+            EditAction::make(),
+            DeleteAction::make(),
+        ])->bulkActions([
+            BulkActionGroup::make([DeleteBulkAction::make()]),
+        ]);
     }
 
     public static function getPages(): array
     {
-        return ['index' => Pages\ListUsers::route('/'), 'create' => Pages\CreateUser::route('/create'), 'edit' => Pages\EditUser::route('/{record}/edit')];
+        return [
+            'index'  => Pages\ListUsers::route('/'),
+            'create' => Pages\CreateUser::route('/create'),
+            'edit'   => Pages\EditUser::route('/{record}/edit'),
+        ];
     }
 }

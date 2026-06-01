@@ -2,6 +2,10 @@
 namespace App\Filament\Resources;
 use App\Filament\Resources\TemplateResource\Pages;
 use App\Models\Template;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
@@ -40,11 +44,20 @@ class TemplateResource extends Resource
             Tables\Columns\TextColumn::make('status')->badge()->color(fn($s) => match($s) { 'active'=>'success', default=>'gray' }),
             Tables\Columns\IconColumn::make('is_premium')->boolean()->label('Premium'),
             Tables\Columns\TextColumn::make('invitations_count')->counts('invitations')->label('Digunakan'),
-        ])->actions([Tables\Actions\EditAction::make(), Tables\Actions\DeleteAction::make()])->bulkActions([Tables\Actions\BulkActionGroup::make([Tables\Actions\DeleteBulkAction::make()])]);
+        ])->actions([
+            EditAction::make(),
+            DeleteAction::make(),
+        ])->bulkActions([
+            BulkActionGroup::make([DeleteBulkAction::make()]),
+        ]);
     }
 
     public static function getPages(): array
     {
-        return ['index' => Pages\ListTemplates::route('/'), 'create' => Pages\CreateTemplate::route('/create'), 'edit' => Pages\EditTemplate::route('/{record}/edit')];
+        return [
+            'index'  => Pages\ListTemplates::route('/'),
+            'create' => Pages\CreateTemplate::route('/create'),
+            'edit'   => Pages\EditTemplate::route('/{record}/edit'),
+        ];
     }
 }

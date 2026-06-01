@@ -2,6 +2,10 @@
 namespace App\Filament\Resources;
 use App\Filament\Resources\InvitationResource\Pages;
 use App\Models\Invitation;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\ViewAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
 use Filament\Resources\Resource;
@@ -36,12 +40,19 @@ class InvitationResource extends Resource
             Tables\Columns\TextColumn::make('status')->badge()->color(fn($s) => match($s) { 'published'=>'success','draft'=>'warning','archived'=>'gray', default=>'gray' }),
             Tables\Columns\TextColumn::make('rsvps_count')->counts('rsvps')->label('RSVP'),
             Tables\Columns\TextColumn::make('created_at')->since()->sortable(),
-        ])->actions([Tables\Actions\ViewAction::make(), Tables\Actions\DeleteAction::make()])
-        ->bulkActions([Tables\Actions\BulkActionGroup::make([Tables\Actions\DeleteBulkAction::make()])]);
+        ])->actions([
+            ViewAction::make(),
+            DeleteAction::make(),
+        ])->bulkActions([
+            BulkActionGroup::make([DeleteBulkAction::make()]),
+        ]);
     }
 
     public static function getPages(): array
     {
-        return ['index' => Pages\ListInvitations::route('/'), 'view' => Pages\ViewInvitation::route('/{record}')];
+        return [
+            'index' => Pages\ListInvitations::route('/'),
+            'view'  => Pages\ViewInvitation::route('/{record}'),
+        ];
     }
 }

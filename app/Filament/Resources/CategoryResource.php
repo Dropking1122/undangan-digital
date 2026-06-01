@@ -2,6 +2,10 @@
 namespace App\Filament\Resources;
 use App\Filament\Resources\CategoryResource\Pages;
 use App\Models\Category;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
@@ -36,11 +40,20 @@ class CategoryResource extends Resource
             Tables\Columns\TextColumn::make('slug'),
             Tables\Columns\IconColumn::make('is_active')->boolean(),
             Tables\Columns\TextColumn::make('templates_count')->counts('templates')->label('Templates'),
-        ])->actions([Tables\Actions\EditAction::make()])->bulkActions([Tables\Actions\BulkActionGroup::make([Tables\Actions\DeleteBulkAction::make()])]);
+        ])->actions([
+            EditAction::make(),
+            DeleteAction::make(),
+        ])->bulkActions([
+            BulkActionGroup::make([DeleteBulkAction::make()]),
+        ]);
     }
 
     public static function getPages(): array
     {
-        return ['index' => Pages\ListCategories::route('/'), 'create' => Pages\CreateCategory::route('/create'), 'edit' => Pages\EditCategory::route('/{record}/edit')];
+        return [
+            'index'  => Pages\ListCategories::route('/'),
+            'create' => Pages\CreateCategory::route('/create'),
+            'edit'   => Pages\EditCategory::route('/{record}/edit'),
+        ];
     }
 }
