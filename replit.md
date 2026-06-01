@@ -170,19 +170,35 @@ Template punya `theme_directory` yang menunjuk ke `resources/views/themes/{dir}/
 
 ---
 
+## Paket Harga (2 Paket)
+
+| Paket | Harga | Galeri Foto | Fitur |
+|---|---|---|---|
+| **Basic** | Rp 45.000 sekali bayar | ✗ Tidak bisa | RSVP, Buku Tamu, Musik, 1 undangan |
+| **Pro** | Rp 60.000 sekali bayar | ✓ Maks. 50 foto | Semua fitur, 5 undangan |
+
+Perbedaan utama: Basic **tidak bisa** upload foto galeri (`can_use_gallery = false`).
+Semua setting paket bisa diubah di admin panel `/admin/plans`.
+
+---
+
 ## Fitur yang Sudah Selesai
 
 - [x] Auth: Login, Register, ForgotPassword (Livewire, no Breeze)
 - [x] Landing page profesional (Cormorant Garamond + Inter)
 - [x] Dashboard dengan create invitation modal
 - [x] Invitation Builder: event, couple, gallery, story, theme, music, RSVP, gift, sections
+- [x] Builder tabs: semua emoji → SVG icons profesional
 - [x] Live preview di builder
 - [x] Public invitation page (open animation, music player, countdown, gallery, RSVP, guestbook, digital gifts)
 - [x] 2 tema: elegant-gold, minimalist
 - [x] Guest name personalization (`?to=NamaTamu`)
 - [x] Admin panel Filament v5: Users, Categories, Plans, Templates, Invitations
+- [x] Admin panel Plans: field `can_use_gallery` (toggle Upload Foto Galeri)
 - [x] Database MySQL 8.0
 - [x] Auto-start script (start.sh)
+- [x] Hamburger menu fixed (vanilla JS, no Alpine conflict)
+- [x] Semua emoji → SVG icons (welcome, auth, dashboard, builder)
 
 ## Fitur yang Belum / Bisa Dikembangkan
 

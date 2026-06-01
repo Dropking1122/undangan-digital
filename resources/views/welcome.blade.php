@@ -97,7 +97,7 @@
         .featured-grid    { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
         .templates-grid   { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .testimonials-grid{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .pricing-grid     { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .pricing-grid-2   { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width:720px; margin:0 auto; }
         .footer-grid      { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 44px; }
 
         @@media (max-width: 1024px) {
@@ -119,8 +119,7 @@
             .featured-grid  { grid-template-columns: 1fr; gap: 32px; }
             .templates-grid { grid-template-columns: 1fr 1fr; }
             .testimonials-grid { grid-template-columns: 1fr; }
-            .pricing-grid { grid-template-columns: 1fr; }
-            .pricing-grid > div { transform: none !important; }
+            .pricing-grid-2 { grid-template-columns: 1fr; }
             .footer-grid  { grid-template-columns: 1fr 1fr; gap: 32px; }
         }
 
@@ -525,36 +524,55 @@
     <div style="max-width:1000px;margin:0 auto;text-align:center;">
         <div class="section-tag">Harga</div>
         <h2 class="serif" style="font-size:clamp(28px,4vw,44px);color:#1A1A2E;margin-bottom:14px;font-weight:600;">Transparan, Tanpa Biaya Tersembunyi</h2>
-        <p style="color:#6B6B7B;font-size:15px;margin-bottom:56px;line-height:1.8;">Mulai gratis selamanya. Upgrade kapan saja tanpa kontrak.</p>
-        <div class="pricing-grid" style="align-items:start;">
-            @foreach([
-                ['Basic','Gratis','Selamanya',['1 undangan aktif','Template gratis','RSVP & Buku Tamu','Link personal tamu','Galeri 5 foto'],false,'#FAFAFA','#1A1A2E'],
-                ['Premium','Rp 99.000','/bulan',['5 undangan aktif','Semua template premium','Upload musik latar','Galeri 50 foto','Analitik lengkap','Prioritas support'],true,'linear-gradient(135deg,#1A1A2E,#2A2A45)','white'],
-                ['Business','Rp 249.000','/bulan',['Unlimited undangan','Custom domain','White label','Galeri unlimited','API access','Dedicated support'],false,'#FAFAFA','#1A1A2E'],
-            ] as [$name,$price,$per,$features,$popular,$bg,$textColor])
-            <div style="background:{{ $bg }};border-radius:24px;padding:32px 28px;position:relative;{{ $popular ? 'box-shadow:0 20px 56px rgba(26,26,46,.25);' : 'border:1px solid #EEEBE6;' }}">
-                @if($popular)
-                <div style="position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#C9A96E,#A0824A);color:white;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 14px;border-radius:50px;white-space:nowrap;">Paling Populer</div>
-                @endif
-                <h3 style="font-size:20px;font-weight:700;color:{{ $textColor }};margin-bottom:8px;">{{ $name }}</h3>
-                <div style="margin-bottom:8px;">
-                    <span class="serif" style="font-size:38px;font-weight:600;color:{{ $textColor }};">{{ $price }}</span>
-                    <span style="font-size:13px;color:{{ $popular ? 'rgba(255,255,255,.4)' : '#9B9BAB' }};">{{ $per }}</span>
+        <p style="color:#6B6B7B;font-size:15px;margin-bottom:56px;line-height:1.8;">Harga sekali bayar, akses seumur hidup. Pilih paket sesuai kebutuhan Anda.</p>
+        <div class="pricing-grid-2">
+            {{-- Basic --}}
+            <div style="background:#FAFAFA;border:1px solid #EEEBE6;border-radius:24px;padding:36px 32px;position:relative;">
+                <h3 style="font-size:20px;font-weight:700;color:#1A1A2E;margin-bottom:6px;">Basic</h3>
+                <p style="font-size:13px;color:#9B9BAB;margin-bottom:20px;">Undangan elegan tanpa foto galeri</p>
+                <div style="margin-bottom:4px;">
+                    <span class="serif" style="font-size:42px;font-weight:600;color:#1A1A2E;">Rp 45.000</span>
                 </div>
-                <div style="height:1px;background:{{ $popular ? 'rgba(255,255,255,.1)' : '#EEEBE6' }};margin:20px 0;"></div>
+                <p style="font-size:12px;color:#C9A96E;font-weight:600;margin-bottom:20px;">Sekali bayar</p>
+                <div style="height:1px;background:#EEEBE6;margin:20px 0;"></div>
                 <ul style="list-style:none;text-align:left;margin-bottom:28px;">
-                    @foreach($features as $f)
-                    <li style="display:flex;align-items:center;gap:9px;padding:7px 0;font-size:13.5px;color:{{ $textColor }};{{ !$loop->first ? 'border-top:1px solid '.($popular ? 'rgba(255,255,255,.06)' : '#F0EDE8').';' : '' }}">
+                    @foreach(['1 undangan aktif','Semua template','RSVP & Buku Tamu','Upload musik latar','Link personal tamu','Tanpa foto galeri'] as $f)
+                    <li style="display:flex;align-items:center;gap:9px;padding:7px 0;font-size:13.5px;color:#4A4A5A;{{ !$loop->first ? 'border-top:1px solid #F0EDE8;' : '' }}">
+                        @if($loop->last)
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D1D5DB" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        @else
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        @endif
+                        {{ $f }}
+                    </li>
+                    @endforeach
+                </ul>
+                <a href="{{ route('register') }}" style="display:block;text-align:center;padding:13px;background:linear-gradient(135deg,#1A1A2E,#2A2A45);color:white;border-radius:50px;font-size:13.5px;font-weight:700;text-decoration:none;">
+                    Pilih Basic
+                </a>
+            </div>
+            {{-- Pro --}}
+            <div style="background:linear-gradient(135deg,#1A1A2E,#2A2A45);border-radius:24px;padding:36px 32px;position:relative;box-shadow:0 20px 56px rgba(26,26,46,.25);">
+                <div style="position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#C9A96E,#A0824A);color:white;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 14px;border-radius:50px;white-space:nowrap;">Paling Populer</div>
+                <h3 style="font-size:20px;font-weight:700;color:white;margin-bottom:6px;">Pro</h3>
+                <p style="font-size:13px;color:rgba(255,255,255,.4);margin-bottom:20px;">Semua fitur lengkap termasuk galeri foto</p>
+                <div style="margin-bottom:4px;">
+                    <span class="serif" style="font-size:42px;font-weight:600;color:white;">Rp 60.000</span>
+                </div>
+                <p style="font-size:12px;color:#C9A96E;font-weight:600;margin-bottom:20px;">Sekali bayar</p>
+                <div style="height:1px;background:rgba(255,255,255,.1);margin:20px 0;"></div>
+                <ul style="list-style:none;text-align:left;margin-bottom:28px;">
+                    @foreach(['5 undangan aktif','Semua template premium','RSVP & Buku Tamu','Upload musik latar','Galeri foto (maks. 50 foto)','Link personal tamu'] as $f)
+                    <li style="display:flex;align-items:center;gap:9px;padding:7px 0;font-size:13.5px;color:white;{{ !$loop->first ? 'border-top:1px solid rgba(255,255,255,.06);' : '' }}">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         {{ $f }}
                     </li>
                     @endforeach
                 </ul>
-                <a href="{{ route('register') }}" style="display:block;text-align:center;padding:13px;background:{{ $popular ? 'linear-gradient(135deg,#C9A96E,#A0824A)' : 'linear-gradient(135deg,#1A1A2E,#2A2A45)' }};color:white;border-radius:50px;font-size:13.5px;font-weight:700;text-decoration:none;">
-                    {{ $name==='Basic' ? 'Mulai Gratis' : 'Pilih '.$name }}
+                <a href="{{ route('register') }}" style="display:block;text-align:center;padding:13px;background:linear-gradient(135deg,#C9A96E,#A0824A);color:white;border-radius:50px;font-size:13.5px;font-weight:700;text-decoration:none;">
+                    Pilih Pro
                 </a>
             </div>
-            @endforeach
         </div>
         <p style="margin-top:28px;font-size:12px;color:#bbb;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;">
             <span style="display:flex;align-items:center;gap:5px;">
@@ -562,12 +580,12 @@
                 Pembayaran aman
             </span>
             <span style="display:flex;align-items:center;gap:5px;">
-                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 14l6-6m-4-1l-1 1m4 4l-1 1M3 12a9 9 0 1018 0 9 9 0 00-18 0z"/></svg>
-                Garansi uang kembali 7 hari
-            </span>
-            <span style="display:flex;align-items:center;gap:5px;">
                 <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
                 Data terlindungi
+            </span>
+            <span style="display:flex;align-items:center;gap:5px;">
+                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                Akses seumur hidup
             </span>
         </p>
     </div>
@@ -588,7 +606,7 @@
             Buat Undangan Sekarang — Gratis!
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
-        <p style="font-size:12px;color:rgba(255,255,255,.2);margin-top:18px;letter-spacing:.3px;">Tidak perlu kartu kredit · Setup dalam 5 menit · Gratis selamanya untuk paket Basic</p>
+        <p style="font-size:12px;color:rgba(255,255,255,.2);margin-top:18px;letter-spacing:.3px;">Bayar sekali · Akses seumur hidup · Mulai dari Rp 45.000</p>
     </div>
 </section>
 

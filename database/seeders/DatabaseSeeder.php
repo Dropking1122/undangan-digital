@@ -28,21 +28,35 @@ class DatabaseSeeder extends Seeder
             'is_admin' => false,
         ]);
 
-        // Plans
+        // Hapus paket lama yang sudah tidak dipakai
+        Plan::whereIn('slug', ['premium', 'business'])->delete();
+
+        // Plans — hanya 2 paket
         $basic = Plan::updateOrCreate(['slug' => 'basic'], [
-            'name' => 'Basic', 'price' => 0, 'max_invitations' => 1,
-            'can_use_premium_templates' => false, 'can_upload_music' => false,
-            'max_gallery_images' => 5, 'sort_order' => 1,
+            'name'                       => 'Basic',
+            'description'                => 'Undangan digital elegan tanpa foto galeri',
+            'price'                      => 45000,
+            'max_invitations'            => 1,
+            'can_use_premium_templates'  => true,
+            'can_use_gallery'            => false,
+            'can_upload_music'           => true,
+            'can_use_custom_domain'      => false,
+            'max_gallery_images'         => 0,
+            'is_active'                  => true,
+            'sort_order'                 => 1,
         ]);
-        $premium = Plan::updateOrCreate(['slug' => 'premium'], [
-            'name' => 'Premium', 'price' => 99000, 'max_invitations' => 3,
-            'can_use_premium_templates' => true, 'can_upload_music' => true,
-            'max_gallery_images' => 50, 'sort_order' => 2,
-        ]);
-        Plan::updateOrCreate(['slug' => 'business'], [
-            'name' => 'Business', 'price' => 249000, 'max_invitations' => 10,
-            'can_use_premium_templates' => true, 'can_upload_music' => true,
-            'can_use_custom_domain' => true, 'max_gallery_images' => 200, 'sort_order' => 3,
+        $pro = Plan::updateOrCreate(['slug' => 'pro'], [
+            'name'                       => 'Pro',
+            'description'                => 'Semua fitur lengkap termasuk galeri foto',
+            'price'                      => 60000,
+            'max_invitations'            => 5,
+            'can_use_premium_templates'  => true,
+            'can_use_gallery'            => true,
+            'can_upload_music'           => true,
+            'can_use_custom_domain'      => false,
+            'max_gallery_images'         => 50,
+            'is_active'                  => true,
+            'sort_order'                 => 2,
         ]);
 
         // Categories
