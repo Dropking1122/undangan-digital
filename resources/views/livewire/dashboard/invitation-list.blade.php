@@ -176,44 +176,92 @@
 
             <div style="padding:24px;">
                 <form wire:submit="createInvitation">
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+
+                    {{-- Step indicator --}}
+                    <div style="display:flex;align-items:center;gap:0;margin-bottom:28px;background:#F7F5F2;border-radius:12px;padding:4px;">
+                        <div style="flex:1;text-align:center;padding:7px 4px;border-radius:9px;background:linear-gradient(135deg,#C9A96E,#A0824A);font-size:11px;font-weight:700;color:white;">① Mempelai</div>
+                        <div style="flex:1;text-align:center;padding:7px 4px;font-size:11px;font-weight:600;color:#9B9BAB;">② Acara</div>
+                        <div style="flex:1;text-align:center;padding:7px 4px;font-size:11px;font-weight:600;color:#9B9BAB;">③ Template</div>
+                    </div>
+
+                    {{-- Nama mempelai --}}
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
                         <div>
-                            <label style="display:block;font-size:12px;font-weight:600;color:#4A4A5A;margin-bottom:6px;">Nama Mempelai Pria</label>
-                            <input type="text" wire:model="groomName" placeholder="Nama pria"
+                            <label style="display:block;font-size:11px;font-weight:700;color:#4A4A5A;margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px;">
+                                <svg width="12" height="12" fill="none" stroke="#C9A96E" stroke-width="2" viewBox="0 0 24 24" style="display:inline;vertical-align:middle;margin-right:4px;"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                                Mempelai Pria <span style="color:#EF4444;">*</span>
+                            </label>
+                            <input type="text" wire:model.live.debounce.300ms="groomName" placeholder="Nama pria"
                                 style="width:100%;border:1.5px solid #EDE9E3;border-radius:10px;padding:10px 14px;font-size:13.5px;outline:none;transition:border-color .2s;font-family:'Inter',sans-serif;"
+                                onfocus="this.style.borderColor='#C9A96E'" onblur="this.style.borderColor='#EDE9E3'">
+                            @error('groomName')<span style="color:#EF4444;font-size:11px;margin-top:3px;display:block;">{{ $message }}</span>@enderror
+                        </div>
+                        <div>
+                            <label style="display:block;font-size:11px;font-weight:700;color:#4A4A5A;margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px;">
+                                <svg width="12" height="12" fill="none" stroke="#C9A96E" stroke-width="2" viewBox="0 0 24 24" style="display:inline;vertical-align:middle;margin-right:4px;"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                                Mempelai Wanita <span style="color:#EF4444;">*</span>
+                            </label>
+                            <input type="text" wire:model.live.debounce.300ms="brideName" placeholder="Nama wanita"
+                                style="width:100%;border:1.5px solid #EDE9E3;border-radius:10px;padding:10px 14px;font-size:13.5px;outline:none;transition:border-color .2s;font-family:'Inter',sans-serif;"
+                                onfocus="this.style.borderColor='#C9A96E'" onblur="this.style.borderColor='#EDE9E3'">
+                            @error('brideName')<span style="color:#EF4444;font-size:11px;margin-top:3px;display:block;">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+
+                    {{-- Tanggal & Lokasi --}}
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+                        <div>
+                            <label style="display:block;font-size:11px;font-weight:700;color:#4A4A5A;margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px;">
+                                <svg width="12" height="12" fill="none" stroke="#C9A96E" stroke-width="2" viewBox="0 0 24 24" style="display:inline;vertical-align:middle;margin-right:4px;"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                Tanggal Resepsi
+                            </label>
+                            <input type="date" wire:model="eventDate"
+                                style="width:100%;border:1.5px solid #EDE9E3;border-radius:10px;padding:10px 14px;font-size:13.5px;outline:none;transition:border-color .2s;font-family:'Inter',sans-serif;color:#4A4A5A;"
                                 onfocus="this.style.borderColor='#C9A96E'" onblur="this.style.borderColor='#EDE9E3'">
                         </div>
                         <div>
-                            <label style="display:block;font-size:12px;font-weight:600;color:#4A4A5A;margin-bottom:6px;">Nama Mempelai Wanita</label>
-                            <input type="text" wire:model="brideName" placeholder="Nama wanita"
+                            <label style="display:block;font-size:11px;font-weight:700;color:#4A4A5A;margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px;">
+                                <svg width="12" height="12" fill="none" stroke="#C9A96E" stroke-width="2" viewBox="0 0 24 24" style="display:inline;vertical-align:middle;margin-right:4px;"><path d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><circle cx="12" cy="11" r="3"/></svg>
+                                Lokasi / Gedung
+                            </label>
+                            <input type="text" wire:model="location" placeholder="cth: Ballroom Grand Hotel"
                                 style="width:100%;border:1.5px solid #EDE9E3;border-radius:10px;padding:10px 14px;font-size:13.5px;outline:none;transition:border-color .2s;font-family:'Inter',sans-serif;"
                                 onfocus="this.style.borderColor='#C9A96E'" onblur="this.style.borderColor='#EDE9E3'">
                         </div>
                     </div>
 
-                    <div style="margin-bottom:20px;">
-                        <label style="display:block;font-size:12px;font-weight:600;color:#4A4A5A;margin-bottom:6px;">Judul Undangan</label>
-                        <input type="text" wire:model="invitationTitle" placeholder="cth: Pernikahan Budi & Sari"
-                            style="width:100%;border:1.5px solid #EDE9E3;border-radius:10px;padding:10px 14px;font-size:13.5px;outline:none;transition:border-color .2s;font-family:'Inter',sans-serif;"
-                            onfocus="this.style.borderColor='#C9A96E'" onblur="this.style.borderColor='#EDE9E3'">
-                        @error('invitationTitle')<span style="color:#EF4444;font-size:11px;margin-top:4px;display:block;">{{ $message }}</span>@enderror
+                    {{-- Auto-filled title preview --}}
+                    @if($invitationTitle)
+                    <div style="background:#FDF8F0;border:1px solid #E8D5B0;border-radius:10px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;gap:8px;">
+                        <svg width="14" height="14" fill="none" stroke="#C9A96E" stroke-width="2" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span style="font-size:12px;color:#A0824A;font-weight:600;">{{ $invitationTitle }}</span>
                     </div>
+                    @endif
 
+                    {{-- Template selection --}}
                     <div style="margin-bottom:24px;">
-                        <label style="display:block;font-size:12px;font-weight:600;color:#4A4A5A;margin-bottom:10px;">Pilih Template</label>
+                        <label style="display:block;font-size:11px;font-weight:700;color:#4A4A5A;margin-bottom:10px;text-transform:uppercase;letter-spacing:.4px;">
+                            <svg width="12" height="12" fill="none" stroke="#C9A96E" stroke-width="2" viewBox="0 0 24 24" style="display:inline;vertical-align:middle;margin-right:4px;"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                            Pilih Template <span style="color:#EF4444;">*</span>
+                        </label>
                         @error('selectedTemplateId')<span style="color:#EF4444;font-size:11px;display:block;margin-bottom:8px;">{{ $message }}</span>@enderror
-                        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;">
+                        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;">
                             @foreach($templates as $template)
                             <div wire:click="$set('selectedTemplateId', {{ $template->id }})"
-                                style="border:2px solid {{ $selectedTemplateId == $template->id ? '#C9A96E' : '#EDE9E3' }};border-radius:14px;padding:18px 12px;text-align:center;transition:all .2s;background:{{ $selectedTemplateId == $template->id ? '#FDF8F0' : 'white' }};cursor:pointer;">
-                                <div style="width:36px;height:36px;background:{{ $selectedTemplateId == $template->id ? 'linear-gradient(135deg,#C9A96E,#A0824A)' : '#F7F5F2' }};border-radius:10px;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;">
-                                    <svg width="18" height="18" fill="none" stroke="{{ $selectedTemplateId == $template->id ? 'white' : '#9B9BAB' }}" stroke-width="1.8" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                style="border:2px solid {{ $selectedTemplateId == $template->id ? '#C9A96E' : '#EDE9E3' }};border-radius:14px;padding:16px 10px;text-align:center;transition:all .2s;background:{{ $selectedTemplateId == $template->id ? '#FDF8F0' : 'white' }};cursor:pointer;position:relative;">
+                                @if($selectedTemplateId == $template->id)
+                                <div style="position:absolute;top:6px;right:6px;width:16px;height:16px;background:#C9A96E;border-radius:50%;display:flex;align-items:center;justify-content:center;">
+                                    <svg width="9" height="9" fill="none" stroke="white" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                                 </div>
-                                <p style="font-size:12px;font-weight:600;color:{{ $selectedTemplateId == $template->id ? '#A0824A' : '#1A1A2E' }};">{{ $template->name }}</p>
+                                @endif
+                                <div style="width:34px;height:34px;background:{{ $selectedTemplateId == $template->id ? 'linear-gradient(135deg,#C9A96E,#A0824A)' : '#F7F5F2' }};border-radius:10px;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;">
+                                    <svg width="17" height="17" fill="none" stroke="{{ $selectedTemplateId == $template->id ? 'white' : '#9B9BAB' }}" stroke-width="1.8" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                </div>
+                                <p style="font-size:12px;font-weight:700;color:{{ $selectedTemplateId == $template->id ? '#A0824A' : '#1A1A2E' }};margin-bottom:3px;">{{ $template->name }}</p>
                                 @if($template->is_premium)
-                                <span style="font-size:10px;color:#A0824A;display:block;margin-top:2px;font-weight:600;">Premium</span>
+                                <span style="font-size:9px;color:#A0824A;background:#FDF8F0;padding:2px 6px;border-radius:20px;font-weight:700;border:1px solid #E8D5B0;">Premium</span>
                                 @else
-                                <span style="font-size:10px;color:#15803D;display:block;margin-top:2px;font-weight:600;">Gratis</span>
+                                <span style="font-size:9px;color:#15803D;background:#F0FDF4;padding:2px 6px;border-radius:20px;font-weight:700;border:1px solid #BBF7D0;">Gratis</span>
                                 @endif
                             </div>
                             @endforeach

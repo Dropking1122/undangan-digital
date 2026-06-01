@@ -13,15 +13,41 @@ class InvitationList extends Component
     public string $invitationTitle    = '';
     public string $groomName          = '';
     public string $brideName          = '';
+    public string $eventDate          = '';
+    public string $location           = '';
 
     protected $rules = [
         'selectedTemplateId' => 'required|exists:templates,id',
-        'invitationTitle'    => 'required|string|max:255',
+        'groomName'          => 'required|string|max:100',
+        'brideName'          => 'required|string|max:100',
+        'eventDate'          => 'nullable|date',
+        'location'           => 'nullable|string|max:200',
     ];
+
+    public function updatedGroomName(): void
+    {
+        $this->autoFillTitle();
+    }
+
+    public function updatedBrideName(): void
+    {
+        $this->autoFillTitle();
+    }
+
+    private function autoFillTitle(): void
+    {
+        if ($this->groomName && $this->brideName) {
+            $this->invitationTitle = 'Pernikahan ' . $this->groomName . ' & ' . $this->brideName;
+        }
+    }
 
     public function createInvitation(): void
     {
         $this->validate();
+
+        if (empty($this->invitationTitle)) {
+            $this->invitationTitle = 'Pernikahan ' . $this->groomName . ' & ' . $this->brideName;
+        }
 
         $template   = Template::findOrFail($this->selectedTemplateId);
         $invitation = app(InvitationService::class)->create(auth()->user(), $template, [
@@ -29,10 +55,12 @@ class InvitationList extends Component
             'invitation_data' => [
                 'groom_name' => $this->groomName,
                 'bride_name' => $this->brideName,
+                'event_date' => $this->eventDate ?: null,
+                'location'   => $this->location ?: null,
             ],
         ]);
 
-        $this->reset(['showCreateModal', 'selectedTemplateId', 'invitationTitle', 'groomName', 'brideName']);
+        $this->reset(['showCreateModal', 'selectedTemplateId', 'invitationTitle', 'groomName', 'brideName', 'eventDate', 'location']);
         $this->redirect(route('builder', $invitation->uuid), navigate: true);
     }
 
