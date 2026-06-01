@@ -162,11 +162,11 @@
                         </div>
                         <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#555;">
                             <svg width="11" height="11" fill="none" stroke="#C9A96E" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
-                            5 undangan aktif
+                            Link personal nama tamu
                         </div>
                         <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#555;">
                             <svg width="11" height="11" fill="none" stroke="#C9A96E" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
-                            Semua fitur lainnya tetap ada
+                            RSVP, Buku Tamu & Musik
                         </div>
                     </div>
                 </div>

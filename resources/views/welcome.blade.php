@@ -524,7 +524,7 @@
     <div style="max-width:1000px;margin:0 auto;text-align:center;">
         <div class="section-tag">Harga</div>
         <h2 class="serif" style="font-size:clamp(28px,4vw,44px);color:#1A1A2E;margin-bottom:14px;font-weight:600;">Transparan, Tanpa Biaya Tersembunyi</h2>
-        <p style="color:#6B6B7B;font-size:15px;margin-bottom:56px;line-height:1.8;">Harga sekali bayar, akses seumur hidup. Pilih paket sesuai kebutuhan Anda.</p>
+        <p style="color:#6B6B7B;font-size:15px;margin-bottom:56px;line-height:1.8;">Harga sekali bayar per undangan. Pilih paket sesuai kebutuhan Anda.</p>
         <div class="pricing-grid-2">
             {{-- Basic --}}
             <div style="background:#FAFAFA;border:1px solid #EEEBE6;border-radius:24px;padding:36px 32px;position:relative;">
@@ -536,7 +536,7 @@
                 <p style="font-size:12px;color:#C9A96E;font-weight:600;margin-bottom:20px;">Sekali bayar</p>
                 <div style="height:1px;background:#EEEBE6;margin:20px 0;"></div>
                 <ul style="list-style:none;text-align:left;margin-bottom:28px;">
-                    @foreach(['1 undangan aktif','Semua template','RSVP & Buku Tamu','Upload musik latar','Link personal tamu','Tanpa foto galeri'] as $f)
+                    @foreach(['Semua template','RSVP & Buku Tamu','Upload musik latar','Link personal tamu (nama tamu)','Tanpa foto galeri'] as $f)
                     <li style="display:flex;align-items:center;gap:9px;padding:7px 0;font-size:13.5px;color:#4A4A5A;{{ !$loop->first ? 'border-top:1px solid #F0EDE8;' : '' }}">
                         @if($loop->last)
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D1D5DB" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -562,7 +562,7 @@
                 <p style="font-size:12px;color:#C9A96E;font-weight:600;margin-bottom:20px;">Sekali bayar</p>
                 <div style="height:1px;background:rgba(255,255,255,.1);margin:20px 0;"></div>
                 <ul style="list-style:none;text-align:left;margin-bottom:28px;">
-                    @foreach(['5 undangan aktif','Semua template premium','RSVP & Buku Tamu','Upload musik latar','Galeri foto (maks. 50 foto)','Link personal tamu'] as $f)
+                    @foreach(['Semua template premium','RSVP & Buku Tamu','Upload musik latar','Galeri foto (maks. 50 foto)','Link personal tamu (nama tamu)'] as $f)
                     <li style="display:flex;align-items:center;gap:9px;padding:7px 0;font-size:13.5px;color:white;{{ !$loop->first ? 'border-top:1px solid rgba(255,255,255,.06);' : '' }}">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         {{ $f }}
@@ -585,7 +585,7 @@
             </span>
             <span style="display:flex;align-items:center;gap:5px;">
                 <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-                Akses seumur hidup
+                Aktivasi instan
             </span>
         </p>
     </div>
@@ -606,7 +606,7 @@
             Buat Undangan Sekarang, Gratis!
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
-        <p style="font-size:12px;color:rgba(255,255,255,.2);margin-top:18px;letter-spacing:.3px;">Bayar sekali · Akses seumur hidup · Mulai dari Rp 45.000</p>
+        <p style="font-size:12px;color:rgba(255,255,255,.2);margin-top:18px;letter-spacing:.3px;">Bayar sekali · Aktivasi instan · Mulai dari Rp 45.000</p>
     </div>
 </section>
 
