@@ -1,0 +1,2 @@
+- [Filament v5 API Changes](filament-v5-api.md) — v5 uses Schema not Form for form(), getNavigationIcon() method override avoids PHP 8.4 property type conflict
+- [InvitationMusic Table Name](invitation-music-table.md) — Model resolves to `invitation_music` (singular); must declare `protected $table = 'invitation_musics'`
