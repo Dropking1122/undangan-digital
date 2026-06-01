@@ -116,4 +116,4 @@ php artisan view:clear  2>/dev/null || true
 php artisan storage:link 2>/dev/null || true
 
 echo "→ Starting Laravel server on port 5000..."
-exec php artisan serve --host=0.0.0.0 --port=5000
+exec php -d upload_max_filesize=25M -d post_max_size=30M -d memory_limit=256M artisan serve --host=0.0.0.0 --port=5000

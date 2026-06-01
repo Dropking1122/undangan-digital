@@ -1004,11 +1004,20 @@ body { background: #FDF8F2 !important; }
 }
 
 /* Floral corner ornament overrides */
-.cover-corner { width: 140px !important; height: 140px !important; opacity: 1 !important; }
+.cover-corner { width: 140px !important; height: 140px !important; opacity: 1 !important; display: block !important; }
 .cover-corner.tl { animation: floral-sway    7s ease-in-out infinite; transform-origin: 0 0; }
 .cover-corner.tr { animation: floral-sway-tr 8s ease-in-out infinite .6s; transform-origin: 100% 0; }
 .cover-corner.bl { animation: floral-sway-bl 9s ease-in-out infinite 1.2s; transform-origin: 0 100%; }
 .cover-corner.br { animation: floral-sway-br 7.5s ease-in-out infinite 1.8s; transform-origin: 100% 100%; }
+
+/* Cover names: Cormorant Garamond italic (readable, not cursive script) */
+.cover-name-script {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-style: italic !important;
+    font-size: clamp(2.2rem, 9vw, 3.6rem) !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.02em !important;
+}
 
 /* Floating petals container */
 #floral-petals { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; pointer-events: none; z-index: 9998; overflow: hidden; }
@@ -1080,89 +1089,17 @@ body { background: #FDF8F2 !important; }
 {{-- ══════════════════════════════════════════════════════════════ --}}
 {{-- COVER                                                          --}}
 {{-- ══════════════════════════════════════════════════════════════ --}}
-<div id="inv-cover">
+<div id="inv-cover" wire:ignore>
     <div class="cover-bg"></div>
     <div class="cover-overlay"></div>
 
-    {{-- Corner SVG ornaments --}}
+    {{-- Corner ornaments --}}
     @if($isFloral)
-    {{-- Floral Romantic: botanical corner ornaments --}}
-    <svg class="cover-corner tl" viewBox="0 0 140 140" fill="none">
-        <path d="M2 2 Q20 25 46 52 Q62 70 66 96" stroke="#F4A7B9" stroke-width="1.6" opacity=".6"/>
-        <path d="M2 2 Q25 20 52 46 Q70 62 96 66" stroke="#F4A7B9" stroke-width="1.6" opacity=".6"/>
-        <path d="M30 10 Q24 24 18 40" stroke="#F4A7B9" stroke-width="1.1" opacity=".45"/>
-        <path d="M10 30 Q24 24 40 18" stroke="#F4A7B9" stroke-width="1.1" opacity=".45"/>
-        <path d="M18 40 Q11 30 21 23 Q26 35 18 40Z" fill="#8FBF91" opacity=".7"/>
-        <path d="M40 18 Q30 11 23 21 Q35 26 40 18Z" fill="#8FBF91" opacity=".7"/>
-        <path d="M46 30 Q40 20 50 15 Q54 27 46 30Z" fill="#8FBF91" opacity=".65"/>
-        <path d="M30 46 Q20 40 15 50 Q27 54 30 46Z" fill="#8FBF91" opacity=".65"/>
-        <path d="M60 50 Q53 40 62 34 Q67 46 60 50Z" fill="#8FBF91" opacity=".6"/>
-        <path d="M50 60 Q40 53 34 62 Q46 67 50 60Z" fill="#8FBF91" opacity=".6"/>
-        <ellipse cx="9" cy="9" rx="10" ry="6" fill="#F4A7B9" opacity=".9" transform="rotate(0,9,9)"/>
-        <ellipse cx="9" cy="9" rx="10" ry="6" fill="#F4A7B9" opacity=".9" transform="rotate(36,9,9)"/>
-        <ellipse cx="9" cy="9" rx="10" ry="6" fill="#F4A7B9" opacity=".9" transform="rotate(72,9,9)"/>
-        <ellipse cx="9" cy="9" rx="10" ry="6" fill="#F4A7B9" opacity=".9" transform="rotate(108,9,9)"/>
-        <ellipse cx="9" cy="9" rx="10" ry="6" fill="#F4A7B9" opacity=".9" transform="rotate(144,9,9)"/>
-        <circle cx="9" cy="9" r="5" fill="#F7C04A" opacity=".95"/>
-        <circle cx="9" cy="9" r="2.2" fill="#E8902A" opacity=".85"/>
-        <ellipse cx="66" cy="48" rx="6" ry="3.8" fill="#F9C4D0" opacity=".8" transform="rotate(0,66,48)"/>
-        <ellipse cx="66" cy="48" rx="6" ry="3.8" fill="#F9C4D0" opacity=".8" transform="rotate(60,66,48)"/>
-        <ellipse cx="66" cy="48" rx="6" ry="3.8" fill="#F9C4D0" opacity=".8" transform="rotate(120,66,48)"/>
-        <circle cx="66" cy="48" r="2.8" fill="#F7C04A" opacity=".9"/>
-        <ellipse cx="48" cy="66" rx="6" ry="3.8" fill="#F4A7B9" opacity=".75" transform="rotate(30,48,66)"/>
-        <ellipse cx="48" cy="66" rx="6" ry="3.8" fill="#F4A7B9" opacity=".75" transform="rotate(90,48,66)"/>
-        <ellipse cx="48" cy="66" rx="6" ry="3.8" fill="#F4A7B9" opacity=".75" transform="rotate(150,48,66)"/>
-        <circle cx="48" cy="66" r="2.4" fill="#F7C04A" opacity=".85"/>
-        <circle cx="80" cy="78" r="3" fill="#F4A7B9" opacity=".35"/>
-        <circle cx="78" cy="80" r="2" fill="#F4A7B9" opacity=".25"/>
-    </svg>
-    <svg class="cover-corner tr" viewBox="0 0 140 140" fill="none">
-        <path d="M2 2 Q20 25 46 52 Q62 70 66 96" stroke="#F4A7B9" stroke-width="1.6" opacity=".6"/>
-        <path d="M2 2 Q25 20 52 46 Q70 62 96 66" stroke="#F4A7B9" stroke-width="1.6" opacity=".6"/>
-        <path d="M30 10 Q24 24 18 40" stroke="#F4A7B9" stroke-width="1.1" opacity=".45"/>
-        <path d="M10 30 Q24 24 40 18" stroke="#F4A7B9" stroke-width="1.1" opacity=".45"/>
-        <path d="M18 40 Q11 30 21 23 Q26 35 18 40Z" fill="#8FBF91" opacity=".7"/>
-        <path d="M40 18 Q30 11 23 21 Q35 26 40 18Z" fill="#8FBF91" opacity=".7"/>
-        <path d="M46 30 Q40 20 50 15 Q54 27 46 30Z" fill="#8FBF91" opacity=".65"/>
-        <path d="M30 46 Q20 40 15 50 Q27 54 30 46Z" fill="#8FBF91" opacity=".65"/>
-        <ellipse cx="9" cy="9" rx="10" ry="6" fill="#F4A7B9" opacity=".9" transform="rotate(0,9,9)"/>
-        <ellipse cx="9" cy="9" rx="10" ry="6" fill="#F4A7B9" opacity=".9" transform="rotate(36,9,9)"/>
-        <ellipse cx="9" cy="9" rx="10" ry="6" fill="#F4A7B9" opacity=".9" transform="rotate(72,9,9)"/>
-        <ellipse cx="9" cy="9" rx="10" ry="6" fill="#F4A7B9" opacity=".9" transform="rotate(108,9,9)"/>
-        <ellipse cx="9" cy="9" rx="10" ry="6" fill="#F4A7B9" opacity=".9" transform="rotate(144,9,9)"/>
-        <circle cx="9" cy="9" r="5" fill="#F7C04A" opacity=".95"/>
-        <circle cx="9" cy="9" r="2.2" fill="#E8902A" opacity=".85"/>
-        <ellipse cx="66" cy="48" rx="6" ry="3.8" fill="#F9C4D0" opacity=".8" transform="rotate(0,66,48)"/>
-        <ellipse cx="66" cy="48" rx="6" ry="3.8" fill="#F9C4D0" opacity=".8" transform="rotate(60,66,48)"/>
-        <ellipse cx="66" cy="48" rx="6" ry="3.8" fill="#F9C4D0" opacity=".8" transform="rotate(120,66,48)"/>
-        <circle cx="66" cy="48" r="2.8" fill="#F7C04A" opacity=".9"/>
-    </svg>
-    <svg class="cover-corner bl" viewBox="0 0 140 140" fill="none">
-        <path d="M2 2 Q20 25 46 52 Q62 70 66 96" stroke="#F9C4D0" stroke-width="1.5" opacity=".55"/>
-        <path d="M2 2 Q25 20 52 46 Q70 62 96 66" stroke="#F9C4D0" stroke-width="1.5" opacity=".55"/>
-        <path d="M30 10 Q24 24 18 40" stroke="#F9C4D0" stroke-width="1" opacity=".4"/>
-        <path d="M10 30 Q24 24 40 18" stroke="#F9C4D0" stroke-width="1" opacity=".4"/>
-        <path d="M18 40 Q11 30 21 23 Q26 35 18 40Z" fill="#8FBF91" opacity=".65"/>
-        <path d="M40 18 Q30 11 23 21 Q35 26 40 18Z" fill="#8FBF91" opacity=".65"/>
-        <ellipse cx="9" cy="9" rx="9" ry="5.5" fill="#F9C4D0" opacity=".85" transform="rotate(0,9,9)"/>
-        <ellipse cx="9" cy="9" rx="9" ry="5.5" fill="#F9C4D0" opacity=".85" transform="rotate(60,9,9)"/>
-        <ellipse cx="9" cy="9" rx="9" ry="5.5" fill="#F9C4D0" opacity=".85" transform="rotate(120,9,9)"/>
-        <circle cx="9" cy="9" r="4.5" fill="#F7C04A" opacity=".9"/>
-        <circle cx="9" cy="9" r="2" fill="#E8902A" opacity=".8"/>
-    </svg>
-    <svg class="cover-corner br" viewBox="0 0 140 140" fill="none">
-        <path d="M2 2 Q20 25 46 52 Q62 70 66 96" stroke="#F9C4D0" stroke-width="1.5" opacity=".55"/>
-        <path d="M2 2 Q25 20 52 46 Q70 62 96 66" stroke="#F9C4D0" stroke-width="1.5" opacity=".55"/>
-        <path d="M30 10 Q24 24 18 40" stroke="#F9C4D0" stroke-width="1" opacity=".4"/>
-        <path d="M10 30 Q24 24 40 18" stroke="#F9C4D0" stroke-width="1" opacity=".4"/>
-        <path d="M18 40 Q11 30 21 23 Q26 35 18 40Z" fill="#8FBF91" opacity=".65"/>
-        <path d="M40 18 Q30 11 23 21 Q35 26 40 18Z" fill="#8FBF91" opacity=".65"/>
-        <ellipse cx="9" cy="9" rx="9" ry="5.5" fill="#F9C4D0" opacity=".85" transform="rotate(0,9,9)"/>
-        <ellipse cx="9" cy="9" rx="9" ry="5.5" fill="#F9C4D0" opacity=".85" transform="rotate(60,9,9)"/>
-        <ellipse cx="9" cy="9" rx="9" ry="5.5" fill="#F9C4D0" opacity=".85" transform="rotate(120,9,9)"/>
-        <circle cx="9" cy="9" r="4.5" fill="#F7C04A" opacity=".9"/>
-        <circle cx="9" cy="9" r="2" fill="#E8902A" opacity=".8"/>
-    </svg>
+    {{-- Floral Romantic: botanical corner image files (transparent SVG) --}}
+    <img src="/images/flowers/floral-corner.svg" class="cover-corner tl" alt="" draggable="false">
+    <img src="/images/flowers/floral-corner.svg" class="cover-corner tr" alt="" draggable="false">
+    <img src="/images/flowers/floral-corner.svg" class="cover-corner bl" alt="" draggable="false">
+    <img src="/images/flowers/floral-corner.svg" class="cover-corner br" alt="" draggable="false">
     @else
     {{-- Default: geometric corner ornaments --}}
     <svg class="cover-corner tl" viewBox="0 0 100 100" fill="none">
@@ -1737,11 +1674,34 @@ function openInvitation() {
         }
     }, 1300);
     @endif
-    // Notify Livewire
-    setTimeout(function() {
-        @this.openInvitation();
-    }, 600);
+    // Simpan state di sessionStorage agar tetap terbuka setelah re-render Livewire
+    try { sessionStorage.setItem('_inv_{{ $inv->uuid }}', '1'); } catch(e) {}
 }
+
+// Pulihkan state "terbuka" setelah Livewire re-render (RSVP, buku tamu, dll)
+document.addEventListener('livewire:update', function() {
+    try {
+        if (sessionStorage.getItem('_inv_{{ $inv->uuid }}') === '1') {
+            var m = document.getElementById('inv-main');
+            if (m) m.classList.add('visible');
+        }
+    } catch(e) {}
+});
+// Cek saat halaman pertama load (jika session masih aktif)
+(function() {
+    try {
+        if (sessionStorage.getItem('_inv_{{ $inv->uuid }}') === '1') {
+            var cover = document.getElementById('inv-cover');
+            var main  = document.getElementById('inv-main');
+            if (cover) cover.style.display = 'none';
+            if (main)  main.classList.add('visible');
+            @if($inv->music && $inv->music->is_active && $inv->music->path)
+            var mb = document.getElementById('music-btn');
+            if (mb) mb.style.display = 'flex';
+            @endif
+        }
+    } catch(e) {}
+})();
 
 // ── Scroll reveal ─────────────────────────────────────────────────
 var _revealObs = new IntersectionObserver(function(entries){

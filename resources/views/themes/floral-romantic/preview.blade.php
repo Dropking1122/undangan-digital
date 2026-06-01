@@ -97,10 +97,13 @@
 }
 .fr-names { animation:fr-fadeup .8s ease forwards .2s; opacity:0; }
 .fr-name {
-    font-family:'Great Vibes',cursive;
-    font-size:clamp(2rem,10vw,3rem);
-    color:#3d2a1e; line-height:1.05;
-    text-shadow:0 2px 12px rgba(200,149,108,.25);
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(2.2rem,9vw,3.4rem);
+    font-style:italic;
+    font-weight:600;
+    color:#3d2a1e; line-height:1.1;
+    letter-spacing:0.02em;
+    text-shadow:0 2px 12px rgba(200,149,108,.2);
     display:block;
 }
 .fr-amp {
@@ -408,7 +411,7 @@
 {{-- ══════════ COUNTDOWN ══════════ --}}
 @if(($sections['countdown'] ?? true) && $eDate)
 @php
-    $diff = max(0, now()->diffInDays(\Carbon\Carbon::parse($eDate), false));
+    $diff = max(0, (int) now()->diffInDays(\Carbon\Carbon::parse($eDate), false));
     $months = max(0, (int) now()->diffInMonths(\Carbon\Carbon::parse($eDate), false));
     $weeks  = max(0, (int) now()->diffInWeeks(\Carbon\Carbon::parse($eDate), false));
 @endphp
